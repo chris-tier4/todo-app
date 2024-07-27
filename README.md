@@ -23,3 +23,14 @@ open http://localhost:3000
 - API model: lib > actions 
 - API integration: src > app 
 - UI: src > app > components
+
+
+## audit
+
+```
+# execute audit check
+pnpm audit
+
+# fix as automatically
+pnpm audit fix
+```
