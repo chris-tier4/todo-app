@@ -14,3 +14,27 @@
 
 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
 ```
+
+## fix all detections
+
+```
+ → pnpm lint    --fix
+
+> todo-next-app@1.0.0 lint /Users/uchinishi.koichi/train/todo-app
+> next lint "--fix"
+
+=============
+
+WARNING: You are currently running a version of TypeScript which is not officially supported by @typescript-eslint/typescript-estree.
+
+You may find that it works just fine, or you may not.
+
+SUPPORTED TYPESCRIPT VERSIONS: >=4.3.5 <5.4.0
+
+YOUR TYPESCRIPT VERSION: 5.5.4
+
+Please only submit bug reports when using the officially supported version.
+
+=============
+✔ No ESLint warnings or errors
+```

@@ -85,7 +85,7 @@ export default function Particles({
     magnetism: number
   }
 
-  const resizeCanvas = () => {
+  const resizeCanvas = useCallback(() => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       circles.current.length = 0
       canvasSize.current.w = canvasContainerRef.current.offsetWidth
@@ -96,9 +96,9 @@ export default function Particles({
       canvasRef.current.style.height = `${canvasSize.current.h}px`
       context.current.scale(dpr, dpr)
     }
-  }
+  }, [dpr])
 
-  const circleParams = (): Circle => {
+  const circleParams = useCallback((): Circle => {
     const x = Math.floor(Math.random() * canvasSize.current.w)
     const y = Math.floor(Math.random() * canvasSize.current.h)
     const translateX = 0
@@ -121,9 +121,9 @@ export default function Particles({
       dy,
       magnetism,
     }
-  }
+  },[])
 
-  const drawCircle = (circle: Circle, update = false) => {
+  const drawCircle = useCallback((circle: Circle, update = false) => {
     if (context.current) {
       const { x, y, translateX, translateY, size, alpha } = circle
       context.current.translate(translateX, translateY)
@@ -140,9 +140,9 @@ export default function Particles({
         circles.current.push(circle)
       }
     }
-  }
+  }, [dpr, theme])
 
-  const clearContext = () => {
+  const clearContext = useCallback(() => {
     if (context.current) {
       context.current.clearRect(
         0,
@@ -151,18 +151,18 @@ export default function Particles({
         canvasSize.current.h
       )
     }
-  }
+  }, [])
 
-  const drawParticles = () => {
+  const drawParticles = useCallback(() => {
     clearContext()
     const particleCount = quantity
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams()
       drawCircle(circle)
     }
-  }
+  }, [circleParams, drawCircle, quantity, clearContext])
 
-  const remapValue = (
+  const remapValue = useCallback((
     value: number,
     start1: number,
     end1: number,
@@ -172,9 +172,9 @@ export default function Particles({
     const remapped =
       ((value - start1) * (end2 - start2)) / (end1 - start1) + start2
     return remapped > 0 ? remapped : 0
-  }
+  }, [])
 
-  const animate = () => {
+  const animate = useCallback(() => {
     clearContext()
     circles.current.forEach((circle: Circle, i: number) => {
       // Handle the alpha value
@@ -232,7 +232,16 @@ export default function Particles({
       }
     })
     window.requestAnimationFrame(animate)
-  }
+  }, [
+    clearContext,
+    circles,
+    canvasSize,
+    remapValue,
+    circleParams,
+    drawCircle,
+    ease,
+    staticity
+  ])
 
   return (
     <div className={className} ref={canvasContainerRef} aria-hidden="true">
