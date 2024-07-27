@@ -4,5 +4,7 @@
     "plugin:storybook/recommended"
   ],
   "plugins": [],
-  "rules": {}
+  "rules": {
+    "complexity": ["error", 15]
+  }
 }
