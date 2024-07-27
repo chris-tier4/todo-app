@@ -92,13 +92,13 @@ export default function ClientTodoTable({
 
   const hasSearchFilter = Boolean(filterValue)
 
-  const headerColumns = React.useMemo(() => {
+  const newLocal = React.useMemo(() => {
     if (visibleColumns === "all") return columns
 
-    return columns.filter((column) =>
-      Array.from(visibleColumns).includes(column.key)
+    return columns.filter((column) => Array.from(visibleColumns).includes(column.key)
     )
-  }, [visibleColumns])
+  }, [visibleColumns, columns])
+  const headerColumns = newLocal
 
   const filteredItems = React.useMemo(() => {
     let filteredTodos = [...optimisticTodos]
@@ -117,9 +117,7 @@ export default function ClientTodoTable({
       )
     }
 
-    return filteredTodos
-  }, [optimisticTodos, filterValue, statusFilter])
-
+  }, [optimisticTodos, filterValue, statusFilter, hasSearchFilter, statusOptions.length])
   const items = React.useMemo(() => {
     const start = (page - 1) * rowsPerPage
     const end = start + rowsPerPage
@@ -255,7 +253,7 @@ export default function ClientTodoTable({
           )
       }
     },
-    []
+    [updateOptimisticTodos]
   )
 
   const onRowsPerPageChange = React.useCallback(
@@ -386,7 +384,10 @@ export default function ClientTodoTable({
     onSearchChange,
     onRowsPerPageChange,
     optimisticTodos.length,
-    hasSearchFilter,
+    columns,
+    statusOptions,
+    updateOptimisticTodos,
+    user
   ])
 
   const bottomContent = React.useMemo(() => {

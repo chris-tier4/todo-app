@@ -34,3 +34,13 @@ pnpm audit
 # fix as automatically
 pnpm audit fix
 ```
+
+## lint
+
+```
+# execute pnpm check
+pnpm lint
+
+# fix as automatically
+pnpm lint --fix
+```
