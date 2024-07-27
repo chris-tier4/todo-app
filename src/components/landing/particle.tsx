@@ -39,22 +39,26 @@ export default function Particles({
     return () => {
       window.removeEventListener("resize", initCanvas)
     }
-  }, [theme])
+  }, [
+    theme,
+    animate,
+    initCanvas
+  ])
 
   useEffect(() => {
     onMouseMove()
-  }, [mousePosition.x, mousePosition.y])
+  }, [mousePosition.x, mousePosition.y, onMouseMove])
 
   useEffect(() => {
     initCanvas()
-  }, [refresh])
+  }, [refresh, initCanvas])
 
-  const initCanvas = () => {
+  const initCanvas = useCallback(() => {
     resizeCanvas()
     drawParticles()
-  }
+  }, [resizeCanvas, drawParticles])
 
-  const onMouseMove = () => {
+  const onMouseMove = useCallback(() => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect()
       const { w, h } = canvasSize.current
@@ -66,7 +70,7 @@ export default function Particles({
         mouse.current.y = y
       }
     }
-  }
+  }, [canvasRef, mousePosition, canvasSize])
 
   type Circle = {
     x: number
