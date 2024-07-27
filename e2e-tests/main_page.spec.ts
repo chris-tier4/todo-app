@@ -1,11 +1,14 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "./pages";
 
-test("has title", async ({ page }) => {
-  await page.goto("/");
-  await expect(page).toHaveTitle(
-    "Todos App | Ultimate Task Management Solution"
-  );
-  await expect(
-    page.getByRole("heading", { name: "Welcome to QA Hackathon" })
-  ).toBeVisible();
+test.describe("Main Page", () => {
+  test("4. As a user, I want to create a new to-do item so that I can keep track of my tasks.", async ({
+    loginPage,
+    mainPage,
+  }) => {
+    await loginPage.navigate();
+    await loginPage.login("test@hackaton.com", "test123!");
+    await expect(mainPage.header).toBeVisible();
+    await mainPage.openNewTodoDialog();
+    await expect(mainPage.todoDialog).toBeVisible();
+  });
 });
