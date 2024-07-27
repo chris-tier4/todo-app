@@ -9,7 +9,7 @@
 ./src/components/ui/use-toast.ts
 ./src/components/ui/calendar.tsx
 ./src/components/ui/avatar.tsx
-./src/components/ui/menubar.tsx
+./src/components/ui/menubar.tsx -> DONE
 ./src/components/ui/canvas.tsx
 ./src/components/ui/separator.tsx
 ./src/components/ui/button.tsx
@@ -39,8 +39,13 @@
 ./src/components/global/dropdown-theme.tsx
 ./src/components/global/skeletons.tsx
 ./src/components/global/auth-form.tsx
-./src/components/global/loading.tsx
+./src/components/global/loading.tsx -> DONE
 ./src/components/global/toggle-theme.tsx
 ./src/components/global/providers.tsx
 ```
 
+## rules
+write below files
+
+- src/stories/Loading.stories.tsx
+- src/tests/Loading.test.tsx
